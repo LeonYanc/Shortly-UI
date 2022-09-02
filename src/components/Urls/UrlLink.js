@@ -5,7 +5,7 @@ import classes from "./UrlLink.module.css";
 const UrlLink = (props) => {
   const { longUrl, shortUrl } = props.url;
   const copyHandler = () => {
-    navigator.clipboard.writeText(shortUrl);
+    navigator.clipboard.writeText("http://localhost:8080/" + shortUrl);
   };
 
   return (
