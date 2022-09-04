@@ -7,11 +7,10 @@ function App() {
 
   const shortenUrlHandler = (url) => {
     setUrlLists((prevUrlList) => {
-      const { id, longUrl, shortUrl } = url;
+      const { longUrl, shortUrl } = url;
       return [
         ...prevUrlList,
         {
-          id: id,
           longUrl: longUrl,
           shortUrl: shortUrl,
         },

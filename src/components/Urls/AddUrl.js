@@ -24,8 +24,8 @@ const AddUrl = (props) => {
     if (enteredUrl.trim().length === 0) {
       return;
     }
-    const url = await getShortUrl(enteredUrl, selectedMethod);
-    props.onShortenUrl(url);
+    const shortUrl = await getShortUrl(enteredUrl, selectedMethod);
+    props.onShortenUrl({ longUrl: enteredUrl, shortUrl: shortUrl });
     setEnteredUrl("");
   };
 

@@ -5,7 +5,7 @@ import classes from "./UrlLink.module.css";
 const UrlLink = (props) => {
   const { longUrl, shortUrl } = props.url;
   const copyHandler = () => {
-    navigator.clipboard.writeText("http://localhost:8080/" + shortUrl);
+    navigator.clipboard.writeText(shortUrl);
   };
 
   return (
@@ -13,12 +13,8 @@ const UrlLink = (props) => {
       <span className={classes.longUrl}>{longUrl}</span>
       <span className={classes.rightDiv}>
         <span className={classes.shortUrl}>
-          <a
-            href={"http://localhost:8080/" + shortUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {"http://localhost:8080/" + shortUrl}
+          <a href={shortUrl} target="_blank" rel="noopener noreferrer">
+            {shortUrl}
           </a>
         </span>
         <Button onClick={copyHandler}>copy</Button>

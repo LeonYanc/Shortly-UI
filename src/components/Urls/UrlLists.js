@@ -8,8 +8,8 @@ const UrlLists = (props) => {
   return (
     <Card className={classes.urls}>
       <ul>
-        {props.urls.map((url) => (
-          <UrlLink url={url} key={url.id}></UrlLink>
+        {props.urls.map((url, index) => (
+          <UrlLink url={url} key={index}></UrlLink>
         ))}
       </ul>
     </Card>
