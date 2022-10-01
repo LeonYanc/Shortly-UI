@@ -1,16 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import classes from "./AddUrl.module.css";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
 import axios from "axios";
-
+import AuthContext from "../../store/auth-context";
 //GET longUrl collection
-export const getShortUrl = async (longUrl, method) => {
+export const getShortUrl = async (longUrl, method, token) => {
+  let config = {
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+  };
   try {
-    const res = await axios.post("/shorten", {
-      longUrl: longUrl,
-      encodeMethod: method,
-    });
+    const res = await axios.post(
+      "/shorten",
+      {
+        longUrl: longUrl,
+        encodeMethod: method,
+      },
+      config
+    );
     return res.data;
   } catch (err) {}
 };
@@ -18,13 +27,19 @@ export const getShortUrl = async (longUrl, method) => {
 const AddUrl = (props) => {
   const [enteredUrl, setEnteredUrl] = useState("");
   const [selectedMethod, setSelecttedMethod] = useState("random");
+  const authCtx = useContext(AuthContext);
 
   const addUrlHandler = async (e) => {
     e.preventDefault();
     if (enteredUrl.trim().length === 0) {
       return;
     }
-    const shortUrl = await getShortUrl(enteredUrl, selectedMethod);
+    console.log(authCtx.token);
+    const shortUrl = await getShortUrl(
+      enteredUrl,
+      selectedMethod,
+      authCtx.token
+    );
     props.onShortenUrl({ longUrl: enteredUrl, shortUrl: shortUrl });
     setEnteredUrl("");
   };
